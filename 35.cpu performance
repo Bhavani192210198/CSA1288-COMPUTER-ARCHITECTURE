@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <time.h>
+unsigned long long fibonacci(int n) {
+    unsigned long long a = 0, b = 1, temp;
+    for (int i = 2; i <= n; i++) {
+        temp = a + b;
+        a = b;
+        b = temp;
+    }
+    return b;
+}
+
+int main() {
+    int n = 40; 
+    clock_t start_time, end_time;
+    double execution_time, response_time, throughput;
+
+    start_time = clock();
+    unsigned long long result = fibonacci(n);
+    end_time = clock();
+    execution_time = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;
+    response_time = execution_time;
+    throughput = (execution_time > 0) ? 1.0 / execution_time : 0;
+    printf("Fibonacci(%d) calculation result: %llu\n", n, result);
+    printf("Response Time: %.6f seconds\n", response_time);
+    printf("Throughput: %.6f tasks/second\n", throughput);
+    printf("Execution Time: %.6f seconds\n", execution_time);
+    return 0;
+}
